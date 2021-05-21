@@ -1,27 +1,28 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Leaderboard_info from "./Leaderboard_info.json"; //has the arrays today, month and year
 import "./Leaderboard.css";
+import Transition from "../Transition";
 
-const Leaderboard = () => {
-  const [today, setToday] = useState("block");
-  const [month, setMonth] = useState("none");
-  const [year, setYear] = useState("none");
+const Leaderboard = ({ backgroundColor, headerColor, barColor, ...props }) => {
+  const [scope, setScope] = useState("today"); //day, month or year
+  const [leaderboardNamesAndPoints, setLeaderboardNamesAndPoints] = useState(
+    Leaderboard_info.today
+  );
 
-  const handleClick = (scope) => {
-    switch (scope) {
-      case "Today":
-        setToday("block");
-        setMonth("none");
-        setYear("none");
+  const dayMonthAndYear = ["today", "month", "year"];
+
+  const handleClick = (DayMonthYear) => {
+    setScope(DayMonthYear);
+    switch (DayMonthYear) {
+      case "today":
+        setLeaderboardNamesAndPoints(Leaderboard_info.today);
         break;
-      case "Month":
-        setToday("none");
-        setMonth("block");
-        setYear("none");
+      case "month":
+        setLeaderboardNamesAndPoints(Leaderboard_info.month);
         break;
-      case "Year":
-        setToday("none");
-        setMonth("none");
-        setYear("block");
+      case "year":
+        setLeaderboardNamesAndPoints(Leaderboard_info.year);
         break;
       default:
         break;
@@ -29,257 +30,82 @@ const Leaderboard = () => {
   };
 
   return (
-    <div className="wrapper">
-      <p className="leaderboard_title">LEADERBOARD</p>
-      <div className="leaderboard_section">
-        <div className="leaderboard_tabs">
-          <div className="tabs">
+    <Transition>
+      <div className="wrapper">
+        <p className="leaderboard_title">LEADERBOARD</p>
+        <div
+          className="leaderboard_section"
+          style={{ backgroundColor: headerColor }}
+        >
+          <div className="leaderboard_tabs">
             <ul>
-              <li
-                data-li="today"
-                class={today === "block" && "active"}
-                onClick={() => handleClick("Today")}
-              >
-                Today
-              </li>
-              <li
-                class={month === "block" && "active"}
-                data-li="Month"
-                onClick={() => handleClick("Month")}
-              >
-                Month
-              </li>
-              <li
-                data-li="year"
-                class={year === "block" && "active"}
-                onClick={() => handleClick("Year")}
-              >
-                Year
-              </li>
+              {dayMonthAndYear.map((DayMonthYear, index) => {
+                return (
+                  <li
+                    key={index}
+                    data-li="{DayMonthYear}"
+                    className={DayMonthYear === scope && "active"}
+                    onClick={() => handleClick(DayMonthYear)}
+                  >
+                    {DayMonthYear}
+                  </li>
+                );
+              })}
             </ul>
           </div>
-        </div>
-        <div className="leaderboard_wrap">
-          <div className="leaderboard_item today" style={{ display: today }}>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_1" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>1.</span> Charles John
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "95%" }}></div>
-                </div>
-              </div>
-              <div className="points">195 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_2" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>2.</span> Pedro Suarez
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "95%" }}></div>
-                </div>
-              </div>
-              <div className="points">180 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_3" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>3.</span> Mike Smith
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "60%" }}></div>
-                </div>
-              </div>
-              <div className="points">155 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_4" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>4.</span> Rosey{" "}
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "30%" }}></div>
-                </div>
-              </div>
-              <div className="points">130 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_5" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>5.</span> Scarlett Angela
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "20%" }}></div>
-                </div>
-              </div>
-              <div className="points">110 points</div>
-            </div>
-          </div>
-          <div className="leaderboard_item month" style={{ display: month }}>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_1" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>1.</span> Charles John
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "95%" }}></div>
-                </div>
-              </div>
-              <div className="points">1500 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_3" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>2.</span> Mike Smith
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "90%" }}></div>
-                </div>
-              </div>
-              <div className="points">1250 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_2" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>3.</span> Pedro Suarez
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "85%" }}></div>
-                </div>
-              </div>
-              <div className="points">980 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_4" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>4.</span> Rosey
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "30%" }}></div>
-                </div>
-              </div>
-              <div className="points">570 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_5" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>5.</span> Scarlett Angela
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "20%" }}></div>
-                </div>
-              </div>
-              <div className="points">470 points</div>
-            </div>
-          </div>
-          <div className="leaderboard_item year" style={{ display: year }}>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_3" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>1.</span> Mike
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "95%" }}></div>
-                </div>
-              </div>
-              <div className="points">8900 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_1" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>2.</span> Charles John
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "89%" }}></div>
-                </div>
-              </div>
-              <div className="points">7980 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_2" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>3.</span> Pedro Suarez
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "82%" }}></div>
-                </div>
-              </div>
-              <div className="points">5980 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_4" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>4.</span> Rosey
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "50%" }}></div>
-                </div>
-              </div>
-              <div className="points">4800 points</div>
-            </div>
-            <div className="leaderboard_mem">
-              <div className="img">
-                <img src="resources/profile_pic.png" alt="picture_5" />
-              </div>
-              <div className="name_bar">
-                <p>
-                  <span>5.</span> Scarlett Angela
-                </p>
-                <div className="bar_wrap">
-                  <div className="inner_bar" style={{ width: "40%" }}></div>
-                </div>
-              </div>
-              <div className="points">3705 points</div>
+          <div
+            className="leaderboard_wrap"
+            style={{ backgroundColor: backgroundColor }}
+          >
+            {/* Here each inspector is displayed */}
+            <div className="leaderboard_item" style={{ display: "block" }}>
+              {leaderboardNamesAndPoints.map((inspector, index) => {
+                return (
+                  <div className="leaderboard_mem">
+                    <div className="img">
+                      <img src="resources/profile_pic.png" alt="picture" />
+                    </div>
+                    <div className="name_bar">
+                      <p>
+                        <span>{index + 1}.</span> {inspector.name}
+                      </p>
+                      <div className="bar_wrap">
+                        <div
+                          className="inner_bar"
+                          style={{
+                            width: `${100 - index * 10}%`, //kinda useless formula to make the bars decrease their length as inspectors have less points
+                            backgroundColor: barColor,
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                    <div className="points">{inspector.points} points</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Transition>
   );
+};
+
+Leaderboard.propTypes = {
+  /**
+   * What background color to use
+   */
+  backgroundColor: PropTypes.string,
+  // What color to use for the div that displays "Today", "Month" and "Year"
+  headerColor: PropTypes.string,
+  //Color for the bar
+  barColor: PropTypes.string,
+};
+
+Leaderboard.defaultProps = {
+  backgroundColor: "rgb(243, 245, 228)",
+  headerColor: "#fb444491",
+  barColor: "#e57070",
 };
 
 export default Leaderboard;

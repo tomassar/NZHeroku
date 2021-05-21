@@ -32,6 +32,7 @@
   font-weight: 600;
   color: #3a3d51;
   cursor: pointer;
+  text-transform: capitalize;
 }
 
 .leaderboard_section ul li:hover,
