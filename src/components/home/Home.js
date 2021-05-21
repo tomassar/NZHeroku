@@ -23,7 +23,9 @@ const Home = () => {
             <Link className="btn-link" to="/takeChallenge">
               Take challenge
             </Link>
-            <Link className="btn-link">View past challenges</Link>
+            <Link className="btn-link" to="/home">
+              View past challenges
+            </Link>
             <div className="chart">
               <h2>Challenges completed this week</h2>
               <Chart className="chart" />

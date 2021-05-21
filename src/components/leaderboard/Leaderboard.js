@@ -43,7 +43,7 @@ const Leaderboard = ({ backgroundColor, headerColor, barColor, ...props }) => {
                 <li
                   key={index}
                   data-li="{DayMonthYear}"
-                  className={DayMonthYear === scope && "active"}
+                  className={DayMonthYear === scope ? "active" : undefined}
                   onClick={() => handleClick(DayMonthYear)}
                 >
                   {DayMonthYear}
@@ -60,7 +60,7 @@ const Leaderboard = ({ backgroundColor, headerColor, barColor, ...props }) => {
           <div className="leaderboard_item" style={{ display: "block" }}>
             {leaderboardNamesAndPoints.map((inspector, index) => {
               return (
-                <div className="leaderboard_mem">
+                <div className="leaderboard_mem" key={index}>
                   <div className="img">
                     <img src="resources/profile_pic.png" alt="picture" />
                   </div>

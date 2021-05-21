@@ -7,6 +7,7 @@ import {
   YAxis,
   VerticalGridLines,
   HorizontalGridLines,
+  VerticalBarSeries,
 } from "react-vis";
 import Transition from "../Transition";
 
@@ -28,9 +29,14 @@ const Chart = () => {
           <HorizontalGridLines />
           <XAxis />
           <YAxis />
-          <LineSeries data={data} color="yellow" />
-          <LineSeries data={data} color="purple" />
-          <LineSeries data={data} color="red" />
+          <VerticalBarSeries
+            color={null}
+            data={data}
+            fill="style"
+            opacity={0.52}
+            stroke="rgba(86,137,141,1)"
+            style={{}}
+          />
         </XYPlot>
       </div>
     </Transition>

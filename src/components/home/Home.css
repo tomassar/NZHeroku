@@ -1,7 +1,3 @@
-* {
-  font-family: "Montserrat", sans-serif;
-}
-
 .container_home {
   height: 100vh;
   min-height: 780px;
@@ -31,6 +27,7 @@
 .leaderboard-right h1 {
   text-align: center;
   margin-top: 100px;
+  margin-bottom: 30px;
   font-size: 50px;
   color: rgb(70, 67, 67);
 }
