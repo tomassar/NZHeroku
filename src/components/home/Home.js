@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
-import Leaderboard from "./Leaderboard";
+import Leaderboard from "../leaderboard/Leaderboard";
 import Transition from "../Transition";
+import Chart from "../charts/Chart";
 
 const Home = () => {
   //const [user, setUser] = useState(""); to be implemented when this is a functional component
@@ -23,11 +24,13 @@ const Home = () => {
               Take challenge
             </Link>
             <Link className="btn-link">View past challenges</Link>
+            <div className="chart">
+              <h2>Challenges completed this week</h2>
+              <Chart className="chart" />
+            </div>
           </div>
         </div>
-        <div className="bottom">
-          <Link className="signout btn-link">Sign out</Link>
-        </div>
+        <div className="bottom"></div>
       </div>
     </Transition>
   );

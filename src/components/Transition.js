@@ -9,7 +9,7 @@ const StyledWrapper = styled.div`
   display: inherit;
   flex: inherit;
   flex-direction: inherit;
-  animation: ${fadeIn} 0.5s;
+  animation: ${fadeIn} 0.7s;
 `;
 
 const Wrapper = ({ children }) => {
