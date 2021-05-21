@@ -1,6 +1,6 @@
 .container_home {
   height: 100vh;
-  min-height: 780px;
+  min-height: 850px;
   min-width: 580px;
   background-color: #e5f3f77d;
   opacity: 1;
@@ -39,7 +39,7 @@
 .upper p {
   text-align: center;
   font-size: 30px;
-  margin: 0;
+  margin-top: 1rem;
 }
 
 .middle {
